@@ -58,6 +58,7 @@ namespace InventorySystem
 
         public void OnPlaceInBackpack(Transform slotTransform)
         {
+            transform.parent = slotTransform;
             rb.isKinematic = true; // Disable physics while in backpack
             StartCoroutine(SmoothMove(this.transform, slotTransform.position, slotTransform.rotation));
             itemCollider.enabled = false;
@@ -66,6 +67,7 @@ namespace InventorySystem
 
         public void OnRemoveFromBackpack()
         {
+            transform.parent = null;
             rb.isKinematic = false; // Enable physics
             itemCollider.enabled = true;
             Debug.Log($"{itemName} removed from backpack.");
